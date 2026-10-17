@@ -1,0 +1,24 @@
+{
+  "name": "asta",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Asta - local always-on voice assistant powered by OpenCode + Obsidian",
+  "type": "module",
+  "main": "src/asta.js",
+  "scripts": {
+    "start": "node src/asta.js",
+    "ui": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/open-ui.ps1",
+    "test": "node scripts/test-wake.mjs && node scripts/test-dashboard.mjs",
+    "talk": "node src/asta.js --mode manual",
+    "whisper": "node src/asta.js --mode whisper",
+    "porcupine": "node src/asta.js --mode porcupine",
+    "doctor": "node src/doctor.js",
+    "say": "node src/say.js",
+    "asta": "node src/asta-cli.js"
+  },
+  "dependencies": {
+    "@picovoice/porcupine-node": "^3.0.3",
+    "@picovoice/pvrecorder-node": "^1.2.4",
+    "playwright-core": "^1.64.1"
+  }
+}

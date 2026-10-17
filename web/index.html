@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Asta — Voice Assistant</title>
+    <link rel="icon" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/assets/app.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ---------------------------------------------------------- sidebar -->
+      <aside class="rail">
+        <div class="brand">
+          <div class="brand-mark"><span>A</span></div>
+          <div class="brand-text">
+            <strong>Asta</strong>
+            <span>voice assistant</span>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav">
+          <button class="nav-item is-active" data-view="console">
+            <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9h-9V3Z"/><path d="M14 3.2A9 9 0 0 1 20.8 10H14V3.2Z"/></svg>
+            <span>Console</span>
+          </button>
+          <button class="nav-item" data-view="reminders">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span>Reminders</span>
+            <em class="badge" id="reminder-badge" hidden>0</em>
+          </button>
+          <button class="nav-item" data-view="memory">
+            <svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z"/><path d="M14 3v6h6"/></svg>
+            <span>Memory</span>
+          </button>
+          <button class="nav-item" data-view="settings">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.05A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.05A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6h.09A1.7 1.7 0 0 0 10 3.05V3a2 2 0 1 1 4 0v.05A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9v.09a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.05a1.7 1.7 0 0 0-1.55 1Z"/></svg>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="rail-foot">
+          <div class="conn" id="conn">
+            <span class="conn-dot"></span>
+            <span id="conn-text">connecting…</span>
+          </div>
+          <div class="build" id="build-info">—</div>
+        </div>
+      </aside>
+
+      <!-- ------------------------------------------------------------- main -->
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-title">
+            <h1 id="view-title">Console</h1>
+            <p id="view-sub">A live view of what Asta hears and says</p>
+          </div>
+          <div class="topbar-actions">
+            <div class="pill" id="status-pill" data-status="idle">
+              <span class="dot"></span><span id="status-text">idle</span>
+            </div>
+            <button class="btn ghost" id="btn-pause" title="Stop listening for the wake word">
+              <svg viewBox="0 0 24 24" class="i-sm"><path d="M9 5v14M15 5v14"/></svg>
+              <span id="pause-label">Pause</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- console ------------------------------------------------------- -->
+        <section class="view" id="view-console">
+          <div class="stage card">
+            <div class="orb" id="orb" data-status="idle">
+              <span class="orb-halo"></span>
+              <span class="orb-ring"></span>
+              <span class="orb-core"></span>
+            </div>
+            <div class="stage-info">
+              <div class="stage-status" id="stage-status">Idle</div>
+              <div class="stage-sub" id="stage-sub">Say “Asta” to begin</div>
+              <div class="levels">
+                <div class="levels-bar"><span id="level-fill"></span></div>
+                <div class="levels-meta"><span>microphone</span><span id="level-val">0</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card transcript-card">
+            <div class="card-head">
+              <h2>Transcript</h2>
+              <div class="card-head-actions">
+                <label class="switch"><input type="checkbox" id="toggle-ignored" /><span></span>Show ignored</label>
+                <button class="btn ghost sm" id="btn-clear">Clear</button>
+              </div>
+            </div>
+            <div class="transcript" id="transcript">
+              <div class="empty" id="transcript-empty">
+                <p>Nothing yet.</p>
+                <p class="muted">Say “Asta, what time is it?” or type below.</p>
+              </div>
+            </div>
+            <form class="composer" id="composer">
+              <input id="composer-input" placeholder="Type a message to Asta…" autocomplete="off" spellcheck="false" />
+              <button class="btn primary" type="submit">
+                <svg viewBox="0 0 24 24" class="i-sm"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+                Send
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- reminders ----------------------------------------------------- -->
+        <section class="view is-hidden" id="view-reminders">
+          <div class="card">
+            <div class="card-head"><h2>Add a reminder</h2></div>
+            <form class="row" id="reminder-form">
+              <input id="reminder-text" placeholder="What should I remind you about?" />
+              <input id="reminder-when" class="when" placeholder="When?  in 20 minutes · tomorrow 9am · 17:30" />
+              <button class="btn primary" type="submit">Add</button>
+            </form>
+            <p class="hint" id="reminder-hint">Times understood: “in 20 minutes”, “in 2h”, “tomorrow 9am”, “17:30”, “2026-12-25 08:00”.</p>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Upcoming</h2><span class="count" id="reminder-count"></span></div>
+            <div class="list" id="reminder-list"></div>
+          </div>
+        </section>
+
+        <!-- memory -------------------------------------------------------- -->
+        <section class="view is-hidden" id="view-memory">
+          <div class="card">
+            <div class="card-head">
+              <h2>Remembered facts</h2>
+              <div class="search">
+                <svg viewBox="0 0 24 24" class="i-sm"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input id="memory-search" placeholder="Search memory…" />
+              </div>
+            </div>
+            <div class="list" id="memory-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Search the vault</h2></div>
+            <form class="row" id="vault-form">
+              <input id="vault-q" placeholder="Search all your notes…" />
+              <button class="btn" type="submit">Search</button>
+            </form>
+            <div class="list" id="vault-results"></div>
+          </div>
+        </section>
+
+        <!-- settings ------------------------------------------------------ -->
+        <section class="view is-hidden" id="view-settings">
+          <div class="card">
+            <div class="card-head">
+              <h2>Settings</h2>
+              <div class="card-head-actions">
+                <span class="hint inline" id="settings-state"></span>
+                <button class="btn primary" id="btn-save">Save changes</button>
+              </div>
+            </div>
+            <div class="form-grid" id="settings-form"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>System</h2></div>
+            <div class="kv" id="paths"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toasts" id="toasts"></div>
+
+    <script>
+      window.__ASTA_TOKEN__ = "@@ASTA_TOKEN@@";
+    </script>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>

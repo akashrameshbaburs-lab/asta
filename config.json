@@ -1,0 +1,60 @@
+{
+  "wake": {
+    "mode": "whisper",
+    "picovoiceAccessKey": "",
+    "keywordPaths": [],
+    "sensitivities": [0.6],
+    "label": "Asta"
+  },
+  "stt": {
+    "language": "en",
+    "threads": 8,
+    "timeoutMs": 120000,
+    "prompt": "Asta is a helpful voice assistant."
+  },
+  "tts": {
+    "engine": "piper",
+    "speed": 1.0,
+    "sapiVoice": ""
+  },
+  "audio": {
+    "inputDevice": -1,
+    "silenceThreshold": 500,
+    "silenceMs": 1100,
+    "minUtteranceMs": 350,
+    "maxUtteranceMs": 15000,
+    "beep": true
+  },
+  "brain": {
+    "agent": "asta",
+    "session": "asta-voice",
+    "auto": true,
+    "model": "opencode/beam-free",
+    "timeoutMs": 300000,
+    "systemNote": ""
+  },
+  "vault": {
+    "path": "C:\\Users\\akash\\Downloads\\ash vault",
+    "memoryDir": "Asta/Memory",
+    "remindersFile": "Asta/Reminders.md",
+    "stateDir": "Asta/.asta"
+  },
+  "reminders": {
+    "enabled": true,
+    "pollSeconds": 20
+  },
+  "ui": {
+    "enabled": true,
+    "host": "127.0.0.1",
+    "port": 7373,
+    "openOnStart": true
+  },
+  "paths": {
+    "whisperExe": "",
+    "whisperModel": "models/ggml-small.en.bin",
+    "piperExe": "",
+    "piperVoice": "models/piper/en_US-amy-medium.onnx",
+    "opencodeCli": "",
+    "ffmpeg": ""
+  }
+}

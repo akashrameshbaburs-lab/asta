@@ -1,0 +1,35 @@
+# ---------------------------------------------------------------------------
+# Never commit credentials
+# ---------------------------------------------------------------------------
+# Windows DPAPI-encrypted portal credentials (SRM / Haveloc) and anything else
+# personal. The setup script writes this file; it must stay local.
+secrets.json
+
+# ---------------------------------------------------------------------------
+# Large downloaded binaries and models
+# ---------------------------------------------------------------------------
+# bin/    whisper.cpp (CUDA + CPU) and Piper  -> ~1.9 GB of archives
+# models/ whisper ggml model + Piper voice    -> ~525 MB
+# Both are restored by scripts\download.ps1 + scripts\extract.ps1
+bin/
+models/
+*.zip
+
+# ---------------------------------------------------------------------------
+# Dependencies
+# ---------------------------------------------------------------------------
+node_modules/
+
+# ---------------------------------------------------------------------------
+# Runtime state and output
+# ---------------------------------------------------------------------------
+state/
+tmp/
+logs/
+*.log
+
+# ---------------------------------------------------------------------------
+# Scratch
+# ---------------------------------------------------------------------------
+_probe*.mjs
+.write-test.txt
