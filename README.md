@@ -82,6 +82,24 @@ powershell -File scripts\install-autostart.ps1     # start at logon (hidden)
 powershell -File scripts\uninstall-autostart.ps1   # remove and stop
 ```
 
+## Portal credentials (work in progress)
+
+Asta is being extended to report SRM marks/attendance and Haveloc placement
+notices. Credentials are stored locally and encrypted with the Windows Data
+Protection API, so only the Windows account that created them can read them.
+Nothing is written in plain text, and `secrets.json` is git-ignored.
+
+```powershell
+scripts\setup-credentials.bat     # masked prompt; encrypts and saves
+```
+
+`src/portals/secrets.js` handles encrypt/decrypt; `scripts/secure.ps1` is the
+DPAPI helper it shells out to.
+
+Caveat: Haveloc puts a reCAPTCHA in front of its login page, so a fully
+unattended sign-in there is not possible — the first sign-in may need to be
+completed by hand in a visible browser window.
+
 ## Notes
 
 - Vault features need **Obsidian running**, because the vault tools are served
