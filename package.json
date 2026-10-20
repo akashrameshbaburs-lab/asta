@@ -2,9 +2,35 @@
   "name": "asta",
   "version": "1.0.0",
   "private": true,
-  "description": "Asta - local always-on voice assistant powered by OpenCode + Obsidian",
+  "description": "An always-on, local-first voice assistant for Windows: wake word, local speech-to-text and text-to-speech, an OpenCode agent brain with Obsidian vault access, and a live web dashboard.",
   "type": "module",
   "main": "src/asta.js",
+  "license": "MIT",
+  "author": "Akash RameshBabu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akashrameshbaburs-lab/asta.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akashrameshbaburs-lab/asta/issues"
+  },
+  "homepage": "https://github.com/akashrameshbaburs-lab/asta#readme",
+  "keywords": [
+    "voice-assistant",
+    "whisper",
+    "piper-tts",
+    "opencode",
+    "obsidian",
+    "windows",
+    "local-first",
+    "speech-to-text"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "win32"
+  ],
   "scripts": {
     "start": "node src/asta.js",
     "ui": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/open-ui.ps1",
